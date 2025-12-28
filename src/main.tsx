@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* <Authenticator> */}
-    <Authenticator hideSignUp={true} components={{SignUp: () => null}}>
+    <Authenticator hideSignUp>
       <RouterProvider router={router} />
     </Authenticator>
   </React.StrictMode>
