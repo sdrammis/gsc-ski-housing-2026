@@ -104,6 +104,15 @@ li {
   border-color: #ff0000;
 }
 
+.li-btn-green {
+  background-color: #2d8c2d;
+}
+
+.li-btn-green:hover {
+  background-color: #acffa5;
+  border-color: #00ff00;
+}
+
 a {
   font-weight: 800;
   text-decoration: none;

@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react'
 
 function isUserInAGroup(client, userEmail) {
   const [groups, setGroups] = useState<Array<Schema["Group"]["type"]>>([]);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     client.models.Group.observeQuery().subscribe({
-      next: (data) => setGroups([...data.items]),
+      next: (data) => {
+        setGroups([...data.items]);
+        setLoaded(true);
+      },
     });
   }, []);
-  
+
   const isInGroup: boolean[] = []
   for (const group of groups) {
     if (group.owner === userEmail || group.members?.includes(userEmail) || group.pending_members?.includes(userEmail)) {
@@ -18,11 +22,10 @@ function isUserInAGroup(client, userEmail) {
     }
   }
 
-  if (isInGroup.length == 0) {
-    return true; // Waiting on groups callback
-  }
+  if (!loaded) return { loading: true, inGroup: undefined };
+  if (groups.length === 0) return { loading: false, inGroup: false };
 
-  return !isInGroup.every(b => !b) // Is anything in the list not false
+  return { loading: false, inGroup: !isInGroup.every(b => !b) } // Is anything in the list not false
 }
 
 export { isUserInAGroup };
