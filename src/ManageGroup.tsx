@@ -36,9 +36,9 @@ function ManageGroup() {
     try {
       await client.models.Group.update({
         id: group.id,
-        preferred_gender: preferred_gender as any,
+        preferred_gender: preferred_gender,
         split_bed: split_bed
-      });
+      } as any);
     } catch (error) {
       alert("Error updating preferences.");
     }
@@ -50,7 +50,7 @@ function ManageGroup() {
         id: group.id,
         members: [...(group.members || []), email],
         pending_members: (group.pending_members || []).filter(e => e !== email)
-      });
+      } as any);
     } catch (error) {
       alert("Error confirming request.");
     }
@@ -61,7 +61,7 @@ function ManageGroup() {
       await client.models.Group.update({
         id: group.id,
         pending_members: (group.pending_members || []).filter(e => e !== email)
-      });
+      } as any);
     } catch (error) {
       alert("Error denying request.");
     }
@@ -73,7 +73,7 @@ function ManageGroup() {
         await client.models.Group.update({
           id: group.id,
           members: (group.members || []).filter(e => e !== email)
-        });
+        } as any);
       } catch (error) {
         alert("Error removing member.");
       }

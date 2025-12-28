@@ -91,8 +91,6 @@ function App() {
     return <button className='li-btn' onClick={handleRequest}>Request to join</button>;
   }
 
-  console.log(groups)
-
   return (
     <div style={{width: '50em'}}>
       <h2> MIT GSC 2026 Ski Trip </h2>
