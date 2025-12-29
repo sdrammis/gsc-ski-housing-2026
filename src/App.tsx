@@ -41,7 +41,7 @@ function App() {
       return <LeaveButton group={group} />;
     } 
 
-    // 3) If pending member -> Cancel request button
+    // 3) If pending member 
     if (group.pending_members?.includes(userEmail)) {
       return <span style={{fontSize: 14, color: 'red'}}>Request pending owner approval...</span>
       // return <button className='li-btn li-btn-red'>Cancel request</button>;

@@ -14,7 +14,7 @@ const schema = a.schema({
       members: a.string().array(),
       pending_members: a.string().array(),
       split_bed: a.boolean(),
-      preferred_gender: a.enum(['MALE', 'FEMALE', 'NONE'])
+      preferred_gender: a.string()
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
