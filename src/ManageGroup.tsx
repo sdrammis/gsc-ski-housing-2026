@@ -68,7 +68,7 @@ function ManageGroup() {
   };
 
   const handleRemoveMember = async (email: string) => {
-    if (window.confirm(`Remove ${email.split('@')[0]} from the group?`)) {
+    if (window.confirm(`Remove ${email} from the group?`)) {
       try {
         await client.models.Group.update({
           id: group.id,
@@ -124,10 +124,10 @@ function ManageGroup() {
 
       <h3>Current Members</h3>
       <ul>
-        <li key={group.owner}> {group.owner.split('@')[0]} (You)</li>
+        <li key={group.owner}> {group.owner} (You)</li>
         {(group.members || []).map(email => (
           <li key={email} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1em' }}>
-            {email.split('@')[0]} 
+            {email} 
             <button className='li-btn li-btn-red' onClick={() => handleRemoveMember(email)}>Remove</button>
           </li>
         ))}
@@ -138,7 +138,7 @@ function ManageGroup() {
         <ul>
           {(group.pending_members || []).map(email => (
             <li key={email} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1em' }}>
-              {email.split('@')[0]}
+              {email}
               <div>
                 <button style={{ marginRight: '0.5em' }} className='li-btn li-btn-green' onClick={() => handleConfirm(email)}>Confirm</button>
                 <button className='li-btn li-btn-red' onClick={() => handleDeny(email)}>Deny</button>

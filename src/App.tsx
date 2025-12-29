@@ -35,10 +35,12 @@ function App() {
         </Link>
       );
     }
+
     // 2) If member -> Leave button
     if (group.members?.includes(userEmail)) {
       return <LeaveButton group={group} />;
     } 
+
     // 3) If pending member -> Cancel request button
     if (group.pending_members?.includes(userEmail)) {
       return <span style={{fontSize: 14, color: 'red'}}>Request pending owner approval...</span>
@@ -52,7 +54,9 @@ function App() {
     }
 
     // 5) Else -> Request to join button
-    return <RequestButton group={group} />;
+    if (!inGroup) {
+      return <RequestButton group={group} />;
+    }
   }
 
   function LeaveButton({ group }) {
@@ -110,9 +114,9 @@ function App() {
           return (
             <li key={group.id} style={{maxWidth: '100%', border: isUserInThisGroup ? '2px solid blue' : 'none' }}>
               <div style={{ fontWeight: 'bold' }}>{group.name}</div>
-              <div style={{ fontSize: 12 }}>Owner: {group.owner.split('@')[0]}</div>
-              <div style={{ fontSize: 12 }}>Members: {group.members?.map(p => p?.split('@')[0]).join(', ')}</div>
-              <div style={{ fontSize: 12 }}>Pending: {group.pending_members?.map(p => p?.split('@')[0]).join(', ')}</div>
+              <div style={{ fontSize: 12 }}>Owner: {group.owner}</div>
+              <div style={{ fontSize: 12 }}>Members: {group.members?.join(', ')}</div>
+              <div style={{ fontSize: 12 }}>Pending: {group.pending_members?.join(', ')}</div>
               {getGroupAction(group)}
             </li>
           );
